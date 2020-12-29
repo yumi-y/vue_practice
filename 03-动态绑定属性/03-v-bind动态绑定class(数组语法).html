@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 数组中元素若不加引号，则会将其进行变量处理，若加上引号，则会将其进行字符串进行处理 -->
+      <h2 class="title" :class="[active,line]">{{message}}</h2>
+      <!-- 也可以通过建立一个方法来返回，在对其进行调用 -->
+      <h2 class="title" :class="getClasses()">{{message}}</h2>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+      const app = new Vue({
+        el: "#app",
+        data: {
+          message: "你好啊",
+          active: "aaaaa",
+          line: "bbbbb",
+        },
+        methods: {
+          getClasses: function () {
+            return [this.active, this.line];
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

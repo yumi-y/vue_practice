@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 在进行遍历操作时，尽量绑定key属性，可以提高性能 -->
+      <ul>
+        <li v-for="item in letters" :key="item">{{item}}</li>
+      </ul>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+      const app = new Vue({
+        el: "#app",
+        data: {
+          letters: ["a", "b", "c"],
+        },
+        computed: {},
+        methods: {},
+      });
+    </script>
+  </body>
+</html>

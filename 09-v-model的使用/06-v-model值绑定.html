@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <!--要动态的以遍历的方式来选中类型，值不要写死，动态的进行获取-->
+      <h2>您的爱好是：{{hobbies}}</h2>
+      <label v-for="item in originHobbies">
+        <input type="checkbox" :value="item" v-model="hobbies" />{{item}}
+      </label>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+      const app = new Vue({
+        el: "#app",
+        data: {
+          hobbies: [],
+          originHobbies: [
+            "篮球",
+            "足球",
+            "兵乓球",
+            "羽毛球",
+            "台球",
+            "高尔夫球",
+          ],
+        },
+        computed: {},
+        methods: {},
+      });
+    </script>
+  </body>
+</html>

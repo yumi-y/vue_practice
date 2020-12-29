@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 1、修饰符：lazy  让实时绑定过程不那么频繁，回车等操作才会进行实时绑定-->
+      <input type="text" v-model.lazy="message" />
+      <h2>{{message}}</h2>
+
+      <!-- 2、修饰符：number  可以不用进行类型转化，直接设定成number类型-->
+      <!-- 默认情况下，v-model默认会将传入数值为字符串，在进行转换为数字，即使已加前提条件number类型 -->
+      <input type="number" v-model.number="age" />
+      <h2>{{age}}-{{typeof age}}</h2>
+
+      <!-- 3、修饰符：trim -->
+      <input type="text" v-model.trim="message" />
+      <h2>{{message}}</h2>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+      const app = new Vue({
+        el: "#app",
+        data: {
+          message: "    hello  ",
+          age: 0,
+        },
+        computed: {},
+        methods: {},
+      });
+    </script>
+  </body>
+</html>

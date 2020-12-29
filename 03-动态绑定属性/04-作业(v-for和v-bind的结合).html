@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .active {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 作业需求：点击列表中的哪一项，那么该项的文字变成红色 -->
+    <!-- v-bind的语法糖是‘：’ -->
+    <!-- v-on的语法糖是‘@’ -->
+    <!-- index==mark作为一个是否恒等的判定表达式，若成立则active的值为true，执行样式表达句，否则为false，不执行 -->
+    <!-- 事件监听器v-on监听鼠标点击这一事件，若点击，则把mark换成被点击元素对应index -->
+    <div id="app">
+      <ul>
+        <!-- m是指元素本身，index是指元素的索引值 -->
+        <!-- 每个li都有自己对index -->
+        <li
+          v-for="(m,index) in movies"
+          :class="{active:index==mark}"
+          @click="changeColor(index)"
+        >
+          {{index}}-{{m}}
+        </li>
+      </ul>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+      const app = new Vue({
+        el: "#app",
+        data: {
+          //记录当前哪项变成红色
+          mark: -1,
+          movies: ["海尔兄弟", "火影忍者", "进击的巨人"],
+        },
+        methods: {
+          changeColor(index) {
+            this.mark = index;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

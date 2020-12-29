@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- <h2 v-bind:class="{key1:value1,key2:value2}">{{message}}</h2> -->
+      <!-- 使用布尔值来判断 -->
+      <!-- <h2 v-bind:class="{类名1:true，类名2:false}">{{message}}</h2> -->
+      <!-- 其中必须拥有的class例如title我们直接标明，后期有改动的class通过v-bind标写 -->
+      <h2 class="title" v-bind:class="{active:isActive,line:isLine}">
+        {{message}}
+      </h2>
+      <button v-on:click="btnCLick">按钮</button>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+      const app = new Vue({
+        el: "#app",
+        data: {
+          message: "你好啊！",
+          isActive: true,
+          isLine: true,
+        },
+        methods: {
+          btnCLick: function () {
+            this.isActive = !this.isActive;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

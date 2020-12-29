@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //编程范式：命令式编程/声明式编程
+      //编程范式：面向对象编程（第一公民对象）/函数式编程（第一公民，函数）
+      //filter/map/reduce
+      const num = [10, 20, 44, 25, 222, 444];
+
+      //1、filter中的回调函数又一个要求，必须返回一个布尔值
+      //当返回true时，函数内部会自动将这次回调的n加入到新的数组中
+      //当返回false时，函数内部会过滤这次的n
+      let newNum = num.filter(function (n) {
+        return n < 100;
+      });
+      console.log(newNum);
+      ////1、需求：取出所有小于100对数字
+      //let newNum = [];
+      //for (let n of num) {
+      //  if (n < 100) {
+      //    newNum.push(n);
+      //  }
+      //}
+
+      //2、map函数的使用
+      let new2Num = newNum.map(function (n) {
+        return n * 2;
+      });
+      console.log(new2Num);
+      ////2、需求：将所有小于100的数字进行转化：全部*2
+      //let new2Num = [];
+      //for (let n of newNum) {
+      //  new2Num.push(n * 2);
+      //}
+      //console.log(new2Num);
+
+      //3、reduce函数
+      //reduce作用对数组中所有的内容进行汇总
+      //reduce(参数1，参数2)参数1为一个函数
+      //其中preValue为第一次为第二个参数赋予的初始值
+      let total = new2Num.reduce(function (preValue, n) {
+        return preValue + n;
+      }, 0);
+      console.log(total);
+      ////3、需求：将所有new2Num的数字相加，得到最终结果
+      //let total = 0;
+      //for (let n of new2Num) {
+      //  total += n;
+      //}
+      //console.log(total);
+
+      //综合高阶函数使用
+      const num = [10, 20, 44, 25, 222, 444];
+      let total = num
+        .filter((n) => n < 100)
+        .map((n) => n * 2)
+        .reduce((preValue, n) => preValue + n);
+      console.log(total);
+
+      //let total = num
+      //  .filter(function (n) {
+      //    return n < 100;
+      //  })
+      //  .map(function (n) {
+      //    return n * 2;
+      //  })
+      //  .reduce(function (preValue, n) {
+      //    return preValue + n;
+      //  }, 0);
+      //console.log(total);
+    </script>
+  </body>
+</html>
