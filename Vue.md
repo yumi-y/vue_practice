@@ -94,4 +94,3 @@ beforeCreate:function(){
   ```js
   <h2 class="title" :class="[active,line]">{{message}}</h2>
   ```
-  jqyjqy
