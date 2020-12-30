@@ -94,3 +94,103 @@ beforeCreate:function(){
   ```js
   <h2 class="title" :class="[active,line]">{{message}}</h2>
   ```
+
+## 一、计算属性
+
+### 1.1、计算属性的本质
+
+- fullName:{set{},get{}}
+
+### 1.2、计算属性和 methods 对比
+
+- 计算属性在多次使用时，只会调用一次
+- 它是缓存的
+
+## 二、事件监听
+
+### 2.1 事件监听的基本使用
+
+### 2.2 参数问题
+
+- btnClick
+- btnClick(event)
+- btnClick(abc,event)->$event
+
+### 2.3 修饰符
+
+- stop
+- prevent
+- .enter
+- .once
+- .native
+
+## 三、条件判断
+
+### 3.1 v-if/v-else-if/v-else
+
+### 3.2 登陆小案例
+
+### 3.3v-show
+
+- v-show 和 v-if 区别
+
+## 循环遍历
+
+### 4.1 遍历数组
+
+### 4.2 遍历对象
+
+- value
+- value，key
+- value key index
+
+### 4.3 数组哪些方法是响应式的
+
+## 五、书籍案例
+
+## 六、v-model 的使用
+
+## 6.1 v-model 的基本使用
+
+- v-model=>v-bind:value v-on:input
+
+## 6.2v-model radio/checkbox/select
+
+## 6.3 修饰符
+
+- lazy
+- number
+- trim
+
+## 七、组件化开发
+
+## 7.1 认识组件化
+
+## 7.2 组件的基本使用
+
+## 7.3 全局组件和局部组件
+
+## 7.4 父组件和子组件
+
+## 7.5 注册的语法糖
+
+## 7.6 模板的分类写法
+
+- script
+- template
+
+## 7.7 数据的存放
+
+- 子组件不能直接访问父组件
+- 子组件中有自己的 data，而且必须是一个函数
+- 为什么必须是一个函数
+
+## 7.8 父子组件的通信
+
+- 父传子：props
+- 子传父：$emit
+
+## 7.9 项目
+
+- npm install
+- npm
