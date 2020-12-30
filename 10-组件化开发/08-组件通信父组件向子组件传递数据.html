@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <!--若没有用v-bind传递，则系统会默认将movies当作一个字符串直接传入-->
+      <cpn :movies1="movies" :message1="message"></cpn>
+    </div>
+    <template id="cpn">
+      <div>
+        <ul>
+          <li v-for="item in movies1">{{item}}</li>
+        </ul>
+        <h2>{{message1}}</h2>
+      </div>
+    </template>
+    <script src="../vue.js"></script>
+    <script>
+      //父传子：props
+      const cpn = {
+        template: "#cpn",
+        //props: ["movies1"],
+        //props除了可进行数组写法，也可以使用对象写法，用于进行类型验证
+        //1、利用对象写法可以支持传入数据，还可对传入数据进行验证类型，限制
+        props: {
+          //movies1: Array,
+          // message1: String,
+
+          //2、对象写法还可以在没有传入数据的时候提供一些默认值
+          message1: {
+            type: String,
+            default: "aaaa",
+            //required：true表示给message1传数据是必传数据，如果不传就会报错
+            required: true,
+          },
+          //类型是对象或者数组时，默认值必须是一个函数，如果单纯是一个数组就会报错
+          movies1: {
+            type: Array,
+            default() {
+              return [];
+            },
+          },
+        },
+      };
+      const app = new Vue({
+        el: "#app",
+        data: {
+          message: "hello",
+          movies: ["海贼王", "蜡笔小新", "千与千寻", "你的名字"],
+        },
+        computed: {},
+        methods: {},
+        components: {
+          //字面量属性增强写法 其实表示 'cpn':cpn
+          cpn,
+        },
+      });
+    </script>
+  </body>
+</html>

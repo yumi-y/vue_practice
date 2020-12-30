@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <cpn></cpn>
+      <cpn></cpn>
+      <cpn></cpn>
+    </div>
+    <template id="cpn">
+      <div>
+        <h2>当前计数:{{counter}}</h2>
+        <button @click="increment">+</button>
+        <button @click="decrement">-</button>
+      </div>
+    </template>
+    <script src="../vue.js"></script>
+    <script>
+      //1、注册组件
+      Vue.component("cpn", {
+        template: "#cpn",
+        data() {
+          return {
+            counter: 4,
+            //函数每次返回的是一个新的对象，不会产生连锁反应
+            //return obj
+            //若组件里面是一个对象，则每次获取的是同一个对象，不是一个函数，则会出现组件当中一个改变全部改变的连锁反应
+          };
+        },
+        methods: {
+          increment() {
+            this.counter++;
+          },
+          decrement() {
+            this.counter--;
+          },
+        },
+      });
+
+      const app = new Vue({
+        el: "#app",
+        data: {},
+        computed: {},
+        methods: {},
+      });
+    </script>
+  </body>
+</html>

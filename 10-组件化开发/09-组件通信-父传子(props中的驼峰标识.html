@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- v-bind类型不支持驼峰写法 -->
+      <cpn :c-info="info" :child-my-message="message"></cpn>
+    </div>
+    <template id="cpn">
+      <!-- template中最外层要用 -->
+      <div>
+        <h2>{{cInfo}}</h2>
+        <h2>{{childMyMessage}}</h2>
+      </div>
+    </template>
+    <script src="../vue.js"></script>
+    <script>
+      const cpn = {
+        template: "#cpn",
+        props: {
+          cInfo: {
+            type: Object,
+            default() {
+              return {};
+            },
+          },
+          childMyMessage: {
+            type: String,
+            default: "",
+          },
+        },
+      };
+
+      const app = new Vue({
+        el: "#app",
+        data: {
+          info: {
+            name: "why",
+            age: 18,
+            height: 188,
+          },
+          message: "hello",
+        },
+        computed: {},
+        methods: {},
+        components: {
+          cpn,
+        },
+      });
+    </script>
+  </body>
+</html>
