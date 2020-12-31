@@ -1,0 +1,76 @@
+!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <cpn
+        :number1="num1"
+        :number2="num2"
+        @num1change="num1change"
+        @num2change="num2change"
+      ></cpn>
+    </div>
+    <template id="cpn">
+      <div>
+        <h2>props:{{number1}}</h2>
+        <h2>data:{{dNumber1}}</h2>
+        <!-- v-model不要直接绑定到props中的数据当中，可以新建一个data或computed来进行绑定 -->
+        <!-- <input type="text" v-model="dNumber1" /> -->
+        <input type="text" :value="dNumber1" @input="num1Input" />
+        <h2>props:{{number2}}</h2>
+        <h2>data:{{dNumber2}}</h2>
+        <!-- <input type="text" v-model="dNumber2" /> -->
+        <input type="text" :value="dNumber2" @input="num2Input" />
+      </div>
+    </template>
+    <script src="../vue.js"></script>
+    <script>
+      const app = new Vue({
+        el: "#app",
+        data: {
+          num1: 1,
+          num2: 0,
+        },
+        methods: {
+          num1change(value) {
+            this.num1 = parseFloat(value);
+          },
+          num2change(value) {
+            this.num2 = parseFloat(value);
+          },
+        },
+        components: {
+          cpn: {
+            template: "#cpn",
+            props: {
+              number1: Number,
+              number2: Number,
+              name: "",
+            },
+            data() {
+              return {
+                dNumber1: this.number1,
+                dNumber2: this.number2,
+              };
+            },
+            watch: {
+              dNumber1(newValue) {
+                this.dNumber2 = newValue * 100;
+                this.$emit("num1change", newValue);
+              },
+              dNumber2(newValue) {
+                this.dNumber1 = newValue / 100;
+                this.$emit("num2change", newValue);
+              },
+            },
+          },
+        },
+        computed: {},
+      });
+    </script>
+  </body>
+</html>
