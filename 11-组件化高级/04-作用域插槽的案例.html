@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <cpn></cpn>
+      <cpn>
+        <!-- 建立组件的目的是获取子组件的pLanguages -->
+        <template slot-scope="slot">
+          <span v-for="item in slot.data">{{item}}-</span>
+        </template>
+      </cpn>
+      <cpn>
+        <template slot-scope="slot">
+          <span>{{slot.data.join('*')}}</span>
+        </template>
+      </cpn>
+    </div>
+    <template id="cpn">
+      <div>
+        <!-- 把父组件的值传到data中，再在父组件中调用data获得数组值 -->
+        <slot :data="pLanguages">
+          <ul>
+            <li v-for="item in pLanguages">{{item}}</li>
+          </ul>
+        </slot>
+      </div>
+    </template>
+    <script src="../vue.js"></script>
+    <script>
+      const app = new Vue({
+        el: "#app",
+        data: {
+          message: "hello",
+        },
+        components: {
+          cpn: {
+            template: "#cpn",
+            data() {
+              return {
+                pLanguages: ["JavaScript", "C++", "Python", "Go"],
+              };
+            },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
