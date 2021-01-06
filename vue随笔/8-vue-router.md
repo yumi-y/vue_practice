@@ -155,3 +155,140 @@ const router = new VueRouter({
 
   - active-class：p当<router-link>对应的路由匹配成功时, 会自动给当前元素设置一个router-link-active的class, 设置active-class可以修改默认的名称
 
+- 修改linkActiveClass
+  - 在实例中输入  linkActiveClass：'active'
+- 路由代码跳转
+  - 我们可以在模版template中设置button按钮，监听点击事件，在添加对应方法
+
+```js
+<template>
+  <div>
+     <button @click="linkToHome">首页</button>
+     <router-view></router-view>
+  </div>
+</template>
+<script>
+  export default{
+    name:'APP',
+    methods:{
+      linkToHome(){
+        this.$router.push('./home')
+      }
+    }
+}
+</script>
+```
+
+- 动态路由
+  - 在某些情况下，一个页面的path路径可能是不确定的，比如进入用户界面时，我们希望除了有前面的/user之外，后面还能跟上用户的ID
+
+```js
+//在routes配置
+{
+  path:'/user/:id',
+  component:User
+}
+//在模版中配置
+<div>
+  <h2>{{$route.params.id}}</h2>
+</div>
+//使用路由
+<router-link to="/user/123">用户</router-link>
+```
+
+### 路由懒加载
+
+- 将不同路由对应的组件打包成一个个多js代码块，当路由被访问时才加载对应组件
+
+```js
+//引用后直接使用,
+component:() => import('../components/Home')
+//也可以使用ES6中
+component Home = () => import('../components/Home')
+```
+
+### 认识嵌套路由
+
+- 一个路径映射一个组件，在同一个路径页面中，访问内部的两个路径也会渲染出两个组件
+- 实现嵌套路由有两个步骤
+  - 创建对应子组件，并且在路由映射中配置对应的子路由
+  - 在组件内部使用<router-view>标签
+- 嵌套路由可以设置默认的路径
+
+```js
+{
+  path:'',
+  redirect:'message'
+}
+```
+
+### 传递参数
+
+- 准备工作
+  - 第一步：创建新的组件Profile.vue
+  - 第二步：配置路由映射
+  - 第三步：添加跳转的<router-link>
+
+- 传递参数的方式
+  - params类型
+    - 配置路由格式：/router/：id
+    - 传递的方式：在path后面跟上对应的值
+    - 传递后形成路径：/router/123， /router/abc
+  - query类型
+    - 配置路由格式：/router，也就是普通配置
+    - 传递的方式：对象中使用query的key作为传递方式
+    - 传递后形成路径：/router？id=123， /router？ id=abc
+- 使用方式
+  - <router-link>to的方式
+  - JavaScript代码方式
+
+```js
+//<router-link>to的方式
+<router-link :to="{path:'/profile/'+123,  query:{name:'why',age:18}}"></router-link>
+
+//JavaScript代码方式
+export default{
+  name:'App',
+  methods:{
+    toProfile(){
+      this.$router.push({
+        path:'/profile/'+123,
+        query:{name:'why',age:18}}
+      })
+    }
+  }
+}
+```
+
+- 获取参数
+  - 获取参数通过$route对象获取
+- $route和$router区别
+  - $route为VueRoute实例，想要导航到不同的URL，则使用$route.push方法
+  - $route为当前router跳转对象里面获取name、path、query、params等
+
+### 导航守卫
+
+- vue-router提供的导航守卫主要用来监听监听路由的进入和离开的
+- vue-router提供了beforeEach和afterEach的钩子函数, 它们会在路由即将改变前和改变后触发
+- 我们可以利用beforeEach来完成标题的修改
+  - 首先, 我们可以在钩子当中定义一些标题, 可以利用meta来定义
+  - 其次, 利用导航守卫,修改我们的标题
+
+```js
+//to:即将要进入的目标的路由对象
+//from：当前导航即将要离开的路由对象
+//next：调用该方法时，才能进入下一个钩子
+router.beforeEach((to,from,next) =>{
+  window.document.title = to.meta.title
+  next()
+})
+//如果是后置钩子afterEach，不需要主动调用next()函数
+```
+
+### keep-alive
+
+- keep-alive 是 Vue 内置的一个组件，可以使被包含的组件保留状态，或避免重新渲染
+  - include - 字符串或正则表达，只有匹配的组件会被缓存
+  - exclude - 字符串或正则表达式，任何匹配的组件都不会被缓存
+  - router-view 也是一个组件，如果直接被包在 keep-alive 里面，所有路径匹配到的视图组件都会被缓存：
+
