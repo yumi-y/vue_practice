@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //参数 -> 函数(resolve,reject)
+      //resolve,reject本身他们又是函数
+      //new Promise((resolve, reject) => {
+      //  //第一次网络请求的代码
+      //  setTimeout(() => {
+      //    resolve();
+      //  }, 1000);
+      //})
+      //  .then(() => {
+      //    //第一次拿到结果的处理代码
+      //    console.log("hello");
+      //    console.log("hello");
+      //    console.log("hello");
+      //    console.log("hello");
+      //    console.log("hello");
+      //    console.log("hello");
+      //    return new Promise((resolve, reject) => {
+      //      //第二次网络请求的代码
+      //      setTimeout(() => {
+      //        resolve();
+      //      }, 1000);
+      //    });
+      //  })
+      //  .then(() => {
+      //    //第二次处理的代码
+      //    console.log("vue");
+      //    console.log("vue");
+      //    console.log("vue");
+      //    console.log("vue");
+      //    console.log("vue");
+      //    console.log("vue");
+      //    return new Promise((resolve, reject) => {
+      //      //第三次网络请求的代码
+      //      setTimeout(() => {
+      //        resolve();
+      //      });
+      //    });
+      //  })
+      //  .then(() => {
+      //    console.log(js);
+      //    console.log(js);
+      //    console.log(js);
+      //    console.log(js);
+      //    console.log(js);
+      //    console.log(js);
+      //  });
+
+      //什么情况下会用到promise？一般情况下是有异步操作时，使用promise对这个异步操作进行封装
+      //new ->构造函数(1、保存了一些状态信息 2、执行传入对函数)
+      //在执行传入发回调函数时，会传入两个参数，resolve，reject，这两者本身又是函数
+      new Promise((resolve, reject) => {
+        setTimeout(() => {
+          //成功的时候调用resolve
+          //resolve("hello");
+
+          //失败的时候调用reject
+          reject("error message");
+        }, 1000);
+      })
+        .then((data) => {
+          //1、成功是要处理的代码
+          console.log(data);
+          console.log(data);
+          console.log(data);
+          console.log(data);
+        })
+        .catch((err) => {
+          //失败是执行的代码
+          console.log(err);
+        });
+    </script>
+  </body>
+</html>

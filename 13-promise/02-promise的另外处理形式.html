@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //promise三种状态
+      //pending；等待状态，比如正在进行网络请求，或者定时器没有到时间
+      //fulfill：满足状态，当我们主动回调了resolve，就处于该状态，并且会回调then()
+      //reject：拒绝状态，当我们主动回调了reject，就处于该状态，并且会回调catch()
+      new Promise((resolve, reject) => {
+        setTimeout(() => {
+          //resolve('hello')
+          reject("error message");
+        }, 1000);
+      }).then(
+        (data) => {
+          console.log(data);
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+    </script>
+  </body>
+</html>
